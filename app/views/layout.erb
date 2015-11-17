@@ -15,7 +15,9 @@
       <a href="/browse">browse</a> | 
       <a href="/restaurants">restaurants</a> | 
       <a href="/items">noms</a> | 
-      <a href="/signup">sign up</a>
+      <% if current_user %><a href="/signout">sign out</a>
+      <% else %> <a href="/login">log in</a>
+      <% end %>
     </nav>
   <%= yield %>
 </body>

@@ -1,0 +1,7 @@
+<a href="/restaurants/new">Submit a new restaurant</a>
+  <ul><h3>Restaurants</h3><br>
+  <% restaurant = Restaurant.all %>
+  <% restaurant.each do |restaurant| %>
+    <li><%= restaurant.name %></li>
+  <% end %>
+  </ul>

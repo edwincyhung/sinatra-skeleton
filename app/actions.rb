@@ -24,6 +24,29 @@ get '/reviews/new' do
   erb :new_review
 end
 
+get '/restaurants' do
+  erb :restaurants
+end
+
+get '/restaurants/new' do
+  erb :new_restaurants
+end
+
+get '/logout' do
+  session[:user_id] = nil
+  redirect '/'
+end
+
+get '/reviews/:id' do
+  @review = Review.find(params[:id])
+  erb :reviews
+end
+
+get '/restaurants/:id' do
+  @restaurant = Restaurant.find(params[:id])
+  erb :restaurants
+end
+
 post '/login' do
   email = params[:email]
   password = params[:password]
@@ -69,3 +92,14 @@ post '/reviews/new' do
     )
   redirect '/reviews'
 end
+
+post '/restaurants/create' do
+  name = params[:name]
+  street = params[:street]
+  city = params[:city]
+
+  restaurant = Restaurant.create(name: name, street: street, city: city)
+
+  redirect '/restaurants'
+end
+
