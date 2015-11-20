@@ -1,6 +1,6 @@
 helpers do
   def current_user
-    @current_user = User.find_by(id: session[:user_id]) if session[:user_id] 
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 end
 
@@ -12,12 +12,16 @@ get '/login' do
   erb :login
 end
 
-get '/profile' do
-  erb :profile
-end
-
 get '/signup' do
   erb :signup
+end
+
+get '/profile' do
+  if current_user
+    erb :profile
+  else
+    redirect '/'
+  end
 end
 
 get '/reviews/new' do
@@ -50,17 +54,14 @@ end
 post '/login' do
   email = params[:email]
   password = params[:password]
-  user = User.find_by(email: email)
-  if password == user.password
-    session[:user_id] == user.id
+
+  user = User.find_by(email: email, password: password)
+  if user
+    session[:user_id] = user.id
     redirect '/'
   else
-    redirect '/login'
+    erb :login
   end
-end
-
-post '/profile' do
-  redirect '/'
 end
 
 post '/signup' do
@@ -103,3 +104,12 @@ post '/restaurants/create' do
   redirect '/restaurants'
 end
 
+post '/profile/edit' do
+  username = params[:username]
+  email = params[:email]
+  password = params[:password]
+
+  current_user.update username: username, email: email, password: password
+
+  redirect '/profile'
+end

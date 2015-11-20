@@ -1,0 +1,10 @@
+<h1><%= @current_user.username %></h1>
+<form method="POST" action="/profile/edit">
+  <label for="username">Username: </label>
+  <input type="text" name="username" id="username" value="<%= @current_user.username %>"><br>
+  <label for="email">Email: </label>
+  <input type="email" name="email" id="email" value="<%= @current_user.email %>"><br>
+  <lavel for="password">Password: </lavel>
+  <input type="password" name="password" id="password"><br>
+  <input class="btn btn-default" type="submit" value="Submit">
+</form>

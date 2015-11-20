@@ -1,17 +1,7 @@
-<div class="container">
-  <div class="row">
-    <div class="col col-md-4">
-      <div>Log In</div>
-      <hr>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col col-md-4">
-    <form method="POST" action="login">
-      <input type="email" placeholder="E-Mail" class="form-control" id="exampleInputEmail1" required><br>
-      <input type="password" placeholder="Password" class="form-control" id="exampleInputPassword1" required><br>
-      <input class="btn btn-default" type="submit" value="Submit">
-    </form>
-    </div>
-  </div>
-</div>
+<h1>log in</h1>
+<form method="POST" action="/login">
+<label for="email">Email: </label>
+<input type="email" name="email" id="email" placeholder="email"><br>
+<label for="password">Password: </label>
+<input type="password" name="password" id="password" placeholder="password"><br>
+<input class="btn btn-default" type="submit" value="Submit">
