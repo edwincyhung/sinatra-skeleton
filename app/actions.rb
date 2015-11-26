@@ -1,3 +1,7 @@
+before do
+  redirect '/login' if !current_user && request.path != '/login' && request.path != '/signup'
+end
+
 helpers do
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -39,6 +43,11 @@ end
 get '/logout' do
   session[:user_id] = nil
   redirect '/'
+end
+
+get '/reviews' do
+  @reviews = Review.all.reverse
+  erb :reviews
 end
 
 get '/reviews/:id' do
